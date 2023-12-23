@@ -130,7 +130,7 @@
 
     <script>
         function handleDelete(id) {
-            let deletAbleURL = "{{ route('employee.destroy', 'formId') }}";
+            let deletAbleURL = "{{ route('company.destroy', 'formId') }}";
             let url = deletAbleURL.replace('formId', id);
             if (confirm('Are you sure you want to delete this?')) {
                 $.ajax({
@@ -141,7 +141,7 @@
                         '_token': '{{ csrf_token() }}',
                     },
                     success: function(data) {
-                        $('#example1').DataTable().ajax.reload();
+                        $('#CompaniesDatable').DataTable().ajax.reload();
 
                     },
                     error: function(error) {}
