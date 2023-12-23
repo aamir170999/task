@@ -71,7 +71,7 @@
                             alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">{{ ucfirst(auth()->user()->name) }}</a>
+                        <a href="#" class="d-block">{{ ucfirst(auth()->user()->name)  }} </a>
                     </div>
                 </div>
 

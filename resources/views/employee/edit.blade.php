@@ -13,6 +13,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Edit employee</h3>
+                    <a href="{{ route('employee.index') }}" class="btn btn-primary float-right">create employee</a>
                 </div>
 
                 {{-- @if ($errors->any())
@@ -74,7 +75,7 @@
                         <div class="form-group">
                             <label for="contact">contact</label>
                             <input type="number" name="contact" class="form-control @error('contact') is-invalid @enderror"
-                                id="contact" placeholder="contact" value="{{ $employee->contact }}">
+                                id="contact"   placeholder="contact"  value="{{ $employee->contact }}">
                             @error('contact')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -82,12 +83,13 @@
                             @enderror
                         </div>
 
-
-
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">UPDATE</button>
                         </div>
                 </form>
             </div>
         </div>
+
+
+
     @endsection

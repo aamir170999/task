@@ -9,19 +9,19 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="CompaniesDatable" class="table table-bordered table-striped">
                     <thead>
 
                         <tr>
                             <th>Name</th>
-                            <th>Email</th>
                             <th>Logo</th>
+                            <th>Email</th>
                             <th>Company website</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($companies as $company)
+                        {{-- @foreach ($companies as $company)
                             <tr>
                                 <td>{{ $company->name }}</td>
                                 <td>{{ $company->email }}</td>
@@ -40,7 +40,7 @@
                                         href="{{ route('company.edit', $company->id) }}"class="btn btn-secondary btn-sm">EDIT</a>
                                 </td>
                             </tr>
-                        @endforeach
+                        @endforeach --}}
                     </tbody>
                 </table>
             </div>
@@ -78,7 +78,7 @@
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-    <script>
+    {{-- <script>
         $(function() {
             $("#example1").DataTable({
                 "responsive": true,
@@ -87,5 +87,66 @@
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
+    </script> --}}
+    <script type="module">
+        $('#CompaniesDatable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: "{{ route('companies.datatable') }}",
+            },
+            columns: [{
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'logo',
+                    name: 'logo',
+                    orderable: false,
+                    searchable: false,
+                },
+                {
+                    data: 'email',
+                    name: 'email'
+                },
+                {
+                    data: 'company_website',
+                    name: 'company_website',
+                    orderable: false,
+                    searchable: false,
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false,
+                },
+            ],
+        });
+    </script>
+
+
+
+
+    <script>
+        function handleDelete(id) {
+            let deletAbleURL = "{{ route('employee.destroy', 'formId') }}";
+            let url = deletAbleURL.replace('formId', id);
+            if (confirm('Are you sure you want to delete this?')) {
+                $.ajax({
+                    url,
+                    method: 'POST',
+                    data: {
+                        '_method': 'DELETE',
+                        '_token': '{{ csrf_token() }}',
+                    },
+                    success: function(data) {
+                        $('#example1').DataTable().ajax.reload();
+
+                    },
+                    error: function(error) {}
+                });
+            }
+        }
     </script>
 @endsection

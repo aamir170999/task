@@ -16,7 +16,6 @@ class Company extends Model
     ];
     public function employee()
     {
-
         return $this->hasMany(employee::class);
     }
 }

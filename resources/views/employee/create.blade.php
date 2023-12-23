@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <label for="fname">Select Company Name</label>
                         <select name="company_id" class="form-control  @error('company_id') is-invalid @enderror"
-                            id="fname">
+                            id="fname"  >
                             @foreach ($companies as $company)
                                 <option value="{{ $company->id }}">{{ $company->name }}</option>
                             @endforeach
@@ -43,7 +43,7 @@
                         <label for="fname">first name</label>
                         <input type="text" name="first_name"
                             class="form-control  @error('first_name') is-invalid @enderror" id="fname"
-                            placeholder=" first name">
+                            placeholder=" first name" value="{{ old('first_name') }}">
                         @error('first_name')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -54,7 +54,7 @@
                         <label for="lname">last name</label>
                         <input type="text" name="last_name"
                             class="form-control  @error('last_name') is-invalid @enderror" id="lname"
-                            placeholder="last name">
+                            placeholder="last name" value="{{ old('last_name') }}">
                         @error('last_name')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -64,7 +64,7 @@
                     <div class="form-group">
                         <label for="email">email</label>
                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                            id="email" placeholder="email">
+                            id="email" placeholder="email" value="{{ old('email') }}">
                         @error('email')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -74,7 +74,7 @@
                     <div class="form-group">
                         <label for="contact">contact</label>
                         <input type="number" name="contact" class="form-control @error('contact') is-invalid @enderror"
-                            id="contact" placeholder="contact">
+                            id="contact" placeholder="contact" value="{{ old('contact') }}">
                         @error('contact')
                             <div class="invalid-feedback">
                                 {{ $message }}

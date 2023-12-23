@@ -1,13 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+@if (session()->has('success'))
+<div class="alert alert-success alert-dismissible fade show">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    {{ session('success') }}
+</div>
+@endif
+
     <div class="container">
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">edit Company</h3>
+                <a href="{{ route('company.index') }}" class="btn btn-primary float-right">back to Companies</a>
             </div>
 
-            <form method="post" action="{{ route('company.update',$company->id) }}">
+            <form method="post" action="{{ route('company.update',$company->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <div class="card-body">

@@ -23,8 +23,12 @@ Auth::routes([
     'register' => false
 ]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => ['auth']], function () {
 
-Route::resource('employee', EmployeeController::class);
-Route::resource('company', CompanyController::class);
-// route::get('add-employee/{company}', [EmployeeController::class, 'addemployee'])->name('employee.add');
+    Route::get('employees-datatable', [EmployeeController::class, 'dataTable'])->name('employees.datatable');
+    Route::get('companies-datatable', [CompanyController::class, 'dataTable'])->name('companies.datatable');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    Route::resource('employee', EmployeeController::class);
+    Route::resource('company', CompanyController::class);
+});
